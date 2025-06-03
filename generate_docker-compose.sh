@@ -46,7 +46,7 @@ echo -en "\033[01;38;5;228m      ░                                        ░ 
 
 echo "${echo_normal}"
 
-echo "${echo_bold}WeatherFlow Collector${echo_normal} (generate_docker-compose.sh) - https://github.com/lux4rd0/weatherflow-collector
+echo "${echo_bold}WeatherFlow Collector${echo_normal} (generate_docker-compose.sh) - https://github.com/eman/weatherflow-collector
 
 collector_key=${echo_bold}${collector_key}${echo_normal} (using partial API key)
 import_days=${echo_bold}${import_days}${echo_normal}
@@ -287,7 +287,7 @@ echo "docker run --rm \\
   -e WEATHERFLOW_COLLECTOR_STATION_ID=\"${station_id[$station_number]}\" \\
   -e WEATHERFLOW_COLLECTOR_THREADS=${threads} \\
   -e WEATHERFLOW_COLLECTOR_TOKEN=${token} \\
-  lux4rd0/weatherflow-collector:latest
+  eman/weatherflow-collector:latest
 
 " > "${FILE_import_remote[$station_number]}"
 
@@ -324,7 +324,7 @@ echo "docker run --rm \\
   -e WEATHERFLOW_COLLECTOR_STATION_NAME=\"${station_name[$station_number]}\" \\
   -e WEATHERFLOW_COLLECTOR_THREADS=${threads} \\
   -e WEATHERFLOW_COLLECTOR_TOKEN=${token} \\
-  lux4rd0/weatherflow-collector:latest
+  eman/weatherflow-collector:latest
 
 " > "${FILE_import_loki_remote_forecast[$station_number]}"
 
@@ -353,7 +353,7 @@ echo "docker run --rm \\
   -e WEATHERFLOW_COLLECTOR_STATION_NAME=\"${station_name[$station_number]}\" \\
   -e WEATHERFLOW_COLLECTOR_THREADS=${threads} \\
   -e WEATHERFLOW_COLLECTOR_TOKEN=${token} \\
-  lux4rd0/weatherflow-collector:latest
+  eman/weatherflow-collector:latest
 
 " > "${FILE_import_loki_remote_rest[$station_number]}"
 
@@ -382,7 +382,7 @@ echo "docker run --rm \\
   -e WEATHERFLOW_COLLECTOR_STATION_NAME=\"${station_name[$station_number]}\" \\
   -e WEATHERFLOW_COLLECTOR_THREADS=${threads} \\
   -e WEATHERFLOW_COLLECTOR_TOKEN=${token} \\
-  lux4rd0/weatherflow-collector:latest
+  eman/weatherflow-collector:latest
 
 " > "${FILE_import_loki_remote_socket[$station_number]}"
 
@@ -411,7 +411,7 @@ echo "docker run --rm \\
   -e WEATHERFLOW_COLLECTOR_STATION_NAME=\"${station_name[$station_number]}\" \\
   -e WEATHERFLOW_COLLECTOR_THREADS=${threads} \\
   -e WEATHERFLOW_COLLECTOR_TOKEN=${token} \\
-  lux4rd0/weatherflow-collector:latest
+  eman/weatherflow-collector:latest
 
 " > "${FILE_import_loki_local_udp[$station_number]}"
 
