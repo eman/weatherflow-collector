@@ -118,5 +118,5 @@ echo "elevation=\"$(echo "${body_station}" |jq -r '.stations['"${station_number}
 done
 #echo "${socket_json}"
 
-#/usr/bin/stdbuf -oL /usr/bin/python weatherflow-listener.py
-/usr/bin/stdbuf -oL /usr/bin/python weatherflow-listener.py | ./exec-local-udp.sh
+#/usr/bin/stdbuf -oL /usr/bin/python3 weatherflow-listener.py
+/usr/bin/stdbuf -oL /usr/bin/python3 weatherflow-listener.py | ./exec-local-udp.sh

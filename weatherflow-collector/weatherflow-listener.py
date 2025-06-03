@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # Reference - Python Listener - https://github.com/p-doyle/Simple-WeatherFlow-Python-Listener

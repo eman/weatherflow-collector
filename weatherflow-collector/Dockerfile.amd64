@@ -1,6 +1,6 @@
-FROM grafana/promtail:2.2.1
+FROM debian:stable-slim
 
-RUN apt-get update && apt-get install -y bc curl dumb-init bash python procps coreutils sysstat vim net-tools
+RUN apt-get update && apt-get install -y bc curl dumb-init bash python3 procps coreutils sysstat vim net-tools jq
 
 RUN mkdir /weatherflow-collector
 RUN mkdir /weatherflow-collector/export
@@ -13,7 +13,6 @@ exec-remote-import.sh \
 exec-remote-rest.sh \
 exec-remote-socket.sh \
 health_check.sh \
-jq \
 logcli-linux-amd64 \
 loki-config.yml \
 start-health-check.sh \
@@ -30,7 +29,6 @@ weatherflow-listener.py \
 websocat_amd64-linux-static \
 /weatherflow-collector/
 
-COPY jq /usr/bin/
 
 WORKDIR /weatherflow-collector
 
@@ -38,7 +36,6 @@ RUN chmod a+x *.sh
 
 RUN chmod +x logcli-linux-amd64 websocat_amd64-linux-static
 
-RUN chmod +x /usr/bin/jq
 
 RUN mv logcli-linux-amd64 logcli
 RUN mv websocat_amd64-linux-static websocat

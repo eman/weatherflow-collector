@@ -55,8 +55,6 @@ import_days=$WEATHERFLOW_COLLECTOR_IMPORT_DAYS
 influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
 influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
 influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
-logcli_host_url=$WEATHERFLOW_COLLECTOR_LOGCLI_URL
-loki_client_url=$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL
 station_id=$WEATHERFLOW_COLLECTOR_STATION_ID
 station_name=$WEATHERFLOW_COLLECTOR_STATION_NAME
 threads=$WEATHERFLOW_COLLECTOR_THREADS
@@ -66,7 +64,6 @@ token=$WEATHERFLOW_COLLECTOR_TOKEN
 ## State purposful details
 ##
 
-if [ -n "$loki_client_url" ]; then echo -en "${echo_bold}${echo_color_start}start:${echo_normal} $(date) - Using \033[01;38;5;52mG\033[01;38;5;124mr\033[01;38;5;196ma\033[01;38;5;202mf\033[01;38;5;208ma\033[01;38;5;214mn\033[01;38;5;220ma${echo_normal} ${echo_bold}Loki${echo_normal} ${echo_bold}${loki_client_url}${echo_normal}\n"; fi
 if [ -n "$influxdb_url" ]; then echo "${echo_bold}${echo_color_start}start:${echo_normal} $(date) - Using InfluxDB ${echo_bold}${influxdb_url}${echo_normal}"; fi
 
 ##
@@ -100,8 +97,6 @@ import_days=${import_days}
 influxdb_password=${influxdb_password}
 influxdb_url=${influxdb_url}
 influxdb_username=${influxdb_username}
-logcli_host_url=${logcli_host_url}
-loki_client_url=${loki_client_url}
 station_id=${station_id}
 station_name=${station_name}
 threads=${threads}
@@ -283,13 +278,7 @@ import_start=$(date +%s%N)
 ## Start "threading"
 ##
 
-logs=$(./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app="weatherflow-collector",collector_type="'"${collector_type}"'",station_name="'"${station_name}"'"}' | jq --slurp)
-#echo "./logcli-linux-amd64 query --addr=\"${logcli_host_url}\" -q --limit=100000 --timezone=Local --forward --from=\"${date_start}\" --to=\"${date_end}\" --output=jsonl '{app=\"weatherflow-collector\",collector_type=\"'\"${collector_type}\"'\",station_name=\"'\"${station_name}\"'\"}')"
-num_of_logs=$(echo "${logs}" | jq -r ". | length")
 
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} Number of logs: ${echo_bold}${num_of_logs}${echo_normal}
-"
-num_of_logs_minus_one=$((num_of_logs-1))
 
 ##
 ## Init Progress
@@ -363,7 +352,7 @@ if [ "${collector_type}" == "remote-socket" ]
 
 then
 
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Retrieving Logs From ${echo_bold}${logcli_host_url}${echo_normal}, Pushing Metrics to ${echo_bold}${influxdb_url}${echo_normal}."
+echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Pushing Metrics to ${echo_bold}${influxdb_url}${echo_normal}."
 echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - collector_type=${echo_bold}${collector_type}${echo_normal}"
 echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - function=${echo_bold}${function}${echo_normal}"
 
