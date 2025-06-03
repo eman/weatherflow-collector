@@ -255,7 +255,7 @@ fi
 
 echo "      WEATHERFLOW_COLLECTOR_THREADS: ${threads}
       WEATHERFLOW_COLLECTOR_TOKEN: ${token}
-    image: lux4rd0/weatherflow-collector:latest
+    image: eman/weatherflow-collector:latest
     ports:
     - protocol: udp
       published: 50222
